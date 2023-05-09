@@ -1,0 +1,53 @@
+.register {
+  height: 100vh;
+  background-color: #1B512D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .card {
+    width: 25%;
+    display: flex;
+    flex-direction: row-reverse;
+    background-color: white;
+    min-height: 600px;
+    overflow: hidden;
+
+    
+
+    .middle {
+      flex: 1;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      justify-content: center;
+
+      h1 {
+      color: #555;
+      }
+      
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        
+        input {
+        border: none;
+        border-bottom: 1px solid #1B512D;
+        padding: 20px 10px;
+        }
+        
+        button {
+          width: 50%;
+          padding: 10px;
+          border: none;
+          background-color:#1B512D;
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
