@@ -1,17 +1,75 @@
 import "./profile.scss";
 import Posts from "../../components/posts/Posts"
+import { useParams } from "react-router-dom";
+import { useEffect , useState} from "react";
+import axios from "axios";
+import {api} from "../../api/index"; 
+
 
 const Profile = () => {
+  const {id} = useParams()
+  const [user, setUser] = useState('')
+  const [observed, setObserved] = useState([])
+
+
+  useEffect(() => {
+    axios.get(api + `/api/users/get-user-data/?id=${id}` 
+      
+    ).then(res => {
+      setUser(res.data)
+      getObserved()
+    })
+  }, [])
+
+  function follow() {
+    axios.post(api + `/api/user/observe/`,{id: user.id}, {
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}` 
+        }
+      }).then(res => {
+   getObserved()
+       
+})
+
+  }
+  function isObserved(){
+    observed.forEach((observation)=> {
+      console.log(observation.observed.id)
+      console.log(parseInt(user.id))
+      console.log(observation.observed.id == parseInt(user.id))
+       if (observation.observed.id == parseInt(user.id) ) {
+         return true
+       }
+     }) 
+     console.log([])
+     return false
+  }
+
+  function getObserved(){
+    axios.get(api + `/api/user/observed/` , {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("token")}` 
+      }
+    }
+      
+    ).then(res => {
+      setObserved(res.data)
+    })
+  }
+  
+
   return (
     <div className="profile">
       <div className="images">
         <img
-          src="https://i.wpimg.pl/1200x/filerepo.grupawp.pl/api/v1/display/embed/a8ccbd79-18ce-458d-9707-936ac5623aa9"
+          src="https://cdn.shopify.com/s/files/1/0342/7123/2137/articles/bone_lab_2048x.jpeg?v=1593474237"
           alt=""
           className="cover"
         />
         <img
-          src="https://i.iplsc.com/dlaczego-niektore-kobiety-wybieraja-pantoflarzy/0007T56EFRJGMTAX-C122-F4.jpg"
+          src="https://whill.inc/pl/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"
           alt=""
           className="profilePic"
         />
@@ -20,12 +78,15 @@ const Profile = () => {
         <div className="uInfo">
           
           <div className="center">
-          
-            <button>follow</button>
+
+            <div>{user.username}</div>
+            
+            {id == localStorage.getItem("user_id") ?"": <button type='submit' onClick={()=> follow()}>{isObserved() ?"unfollow" : "follow"}</button> }
           </div>
         
+         
         </div>
-      <Posts/>
+      <Posts id={id}/>
       </div>
     </div>
   );

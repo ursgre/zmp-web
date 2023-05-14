@@ -7,50 +7,73 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
 import { useState } from "react";
+import axios from "axios";
+import { api } from "../../api/index";
 
 const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
+  const [likes, setLikes] = useState(post.total_likes);
+  const [liked, setLiked] = useState(()=>{
+   var a = post.likes.includes(parseInt(localStorage.getItem("user_id")))
+  
+   return a
+  });
 
   //TEMPORARY
-  const liked = false;
+  
+  
+  function likePost(post_id){
+    axios.post(api + `/api/post/like/${post_id}/`,{}, {
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}` 
+        }
+      }).then(res => {
+     
+        if (liked){
+      setLikes(likes -1)
+    } else {
+      setLikes(likes +1)
+    }
+  setLiked(!liked)
+})
+  }
 
   return (
     <div className="post">
       <div className="container">
         <div className="user">
           <div className="userInfo">
-            <img src={post.profilePic} alt="" />
+            <img src={`data:image/jpeg;base64,${post.file}`} alt="" />
             <div className="details">
               <Link
-                to={`/profile/${post.userId}`}
+                to={`/profile/${post.user.id}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <span className="name">{post.name}</span>
+                <span className="name">{post.user.username}</span>
               </Link>
-              <span className="date">10 min ago</span>
+              
             </div>
           </div>
           <MoreHorizIcon />
         </div>
         <div className="content">
-          <p>{post.desc}</p>
-          <img src={post.img} alt="" />
+          <p>{post.body}</p>
+          <img src={`data:image/jpeg;base64,${post.file}`} alt="" />
         </div>
         <div className="info">
-          <div className="item">
-            {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
-            100 Likes
+          <div className="item" onClick={() => likePost(post.id)}>
+            
+            {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon/>}
+            {likes}
           </div>
           <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
             <TextsmsOutlinedIcon />
-            30 Comments
+            Comments
           </div>
-          <div className="item">
-            <ShareOutlinedIcon />
-            Share
-          </div>
+          
         </div>
-        {commentOpen && <Comments />}
+        {commentOpen && <Comments post_id={post.id} />}
       </div>
     </div>
   );

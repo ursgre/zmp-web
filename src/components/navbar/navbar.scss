@@ -1,6 +1,7 @@
 @import "../../style.scss";
 
 .navbar {
+
   @include themify($themes) {
     display: flex;
     align-items: center;
@@ -64,6 +65,10 @@
         align-items: center;
         gap: 10px;
         font-weight: 500;
+       
+        .container {
+          
+        }
 
         @include tablet{
           display: none;
@@ -76,8 +81,7 @@
           object-fit: cover;
         }
 
-        span {
-        }
+        
       }
     }
   }

@@ -1,13 +1,20 @@
 import "./leftBar.scss";
-import Friends from "../../assets/1.png";
-import Groups from "../../assets/2.png";
 
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { useContext } from "react";
+
 
 const LeftBar = () => {
 
   const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+   
+  function logout() {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user_id')
+    navigate("/login")
+  }
 
   return (
     <div className="leftBar">
@@ -15,18 +22,16 @@ const LeftBar = () => {
         <div className="menu">
           <div className="user">
             <img
-              src={currentUser.profilePic}
+              src="https://whill.inc/pl/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"
               alt=""
             />
-            <span>{currentUser.name}</span>
+            <span>
+              <Link to={`/profile/${localStorage.getItem('user_id')}`}>Your Profile</Link>
+            </span>
           </div>
+         
           <div className="item">
-            <img src={Friends} alt="" />
-            <span>Friends</span>
-          </div>
-          <div className="item">
-            <img src={Groups} alt="" />
-            <span>Groups</span>
+          <button onClick={logout}>Log out</button> 
           </div>
          
         </div>

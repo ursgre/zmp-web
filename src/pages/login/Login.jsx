@@ -1,28 +1,49 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/authContext";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { api } from "../../api/index";
+import axios from "axios";
 import "./login.scss";
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const navigate = useNavigate();
 
-  const handleLogin = () => {
-    login();
-  };
+
+    function handleSubmit(e) {
+        e.preventDefault()
+
+
+        var data = JSON.stringify({
+         username: username,
+         password: password
+        
+        });
+
+        axios.post(api + "/api/users/sign-in/", data, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then(res => {
+            if (res.data.success === true) {
+                localStorage.setItem("token", res.data.token);
+                localStorage.setItem("user_id", res.data.id);
+                
+                navigate("/")
+            }
+        })
+    }
 
   return (
     <div className="login">
       <div className="card">
         
-          
-        
-      
         <div className="middle">
           <h1>Login</h1>
           <form>
-            <input type="text" placeholder="Username" />
-            <input type="password" placeholder="Password" />
-            <button onClick={handleLogin}>Login</button>
+           <input type="text" onChange={e => setUsername(e.target.value)} placeholder="Username" />
+           <input type="password" onChange={e => setPassword(e.target.value)} placeholder="Password" />
+           <button type='submit' onClick={handleSubmit}>Sign in</button>
             <Link to="/register">
             <button>Sign up</button>
           </Link>

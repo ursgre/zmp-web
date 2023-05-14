@@ -1,6 +1,8 @@
 
 import Posts from "../../components/posts/Posts"
+
 import Share from "../../components/share/Share"
+import HomePosts from "../../components/homePosts/homePosts"
 import "./home.scss"
 
 const Home = () => {
@@ -8,7 +10,8 @@ const Home = () => {
     <div className="home">
   
       <Share/>
-      <Posts/>
+      <HomePosts/>
+     
     </div>
   )
 }

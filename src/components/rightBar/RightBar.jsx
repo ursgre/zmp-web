@@ -1,64 +1,18 @@
 import "./rightBar.scss";
+import { useEffect , useState} from "react";
+import axios from "axios";
+import {api} from "../../api/index"; 
 
 const RightBar = () => {
+
+  const [friends, setFriends] = useState([])
+
+  
   return (
     <div className="rightBar">
-      <div className="container">
-        
-        <div className="item">
-          <span>Notifications</span>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://kobietapo30.pl/wp-content/uploads/2022/06/Depositphotos_21438961_L-670x447.jpg"
-                alt=""
-              />
-              <p>
-                <span>Filip Szkielet</span> changed their cover picture
-              </p>
-            </div>
-            
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://cdn.pixabay.com/photo/2019/06/27/13/10/selfie-4302321_960_720.jpg"
-                alt=""
-              />
-              <p>
-                <span>Juliusz Kwiatek</span> died 
-              </p>
-            </div>
+      
           
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://szczerydobolu.pl/wp-content/uploads/2017/11/women_1511101510-1024x682.jpg"
-                alt=""
-              />
-              <p>
-                <span>Marcela Mięta</span> has birthday
-              </p>
-            </div>
-           
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://www.pb.pl/100kobietbiznesu/wp-content/uploads/2022/11/100-kobiet-wszystkie-na-strone-830x830-pawlak-400x400.jpg"
-                alt=""
-              />
-              <p>
-                <span>Anna Lilia</span> added new post
-              </p>
-            </div>
-            
-          </div>
-        </div>
-        <div className="item">
-          <span>Active Friends</span>
-          <div className="user">
+          {/* <div className="user">
             <div className="userInfo">
               <img
                 src="https://www.pb.pl/100kobietbiznesu/wp-content/uploads/2022/11/100-kobiet-wszystkie-na-strone-mniejsze_0011_Ewa-Wernerowicz_RGB-400x400.jpg"
@@ -99,9 +53,13 @@ const RightBar = () => {
              
               <span>Weronika Kos</span>
             </div>
-          </div>
-        </div>
-      </div>
+          </div> */}
+
+        
+
+        
+      
+     
     </div>
   );
 };
