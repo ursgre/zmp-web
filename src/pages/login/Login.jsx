@@ -25,11 +25,12 @@ const Login = () => {
                 "Content-Type": "application/json",
             }
         }).then(res => {
-          console.log("1a")
+          console.log(res.status)
+          console.log(res.data)
             if (res.status == 200) {
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("user_id", res.data.id);
-                console.log("status")
+                
                 navigate("/")
             }
         })
