@@ -23,7 +23,7 @@ const Post = ({ post }) => {
 
   //TEMPORARY
   const navigate = useNavigate();
-  
+  //likes
   function likePost(post_id){
     axios.post(api + `/api/post/like/${post_id}/`,{}, {
       headers: {
