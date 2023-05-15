@@ -1,8 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { api } from "../../api/index";
 import axios from "axios";
 import "./login.scss";
+
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -30,7 +31,7 @@ const Login = () => {
             if (res.status == 200) {
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("user_id", res.data.id);
-                navigate("/")
+                <Navigate to="/login" />
             }
         })
     }
