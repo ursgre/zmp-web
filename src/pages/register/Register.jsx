@@ -26,7 +26,7 @@ const Register = () => {
         "Content-Type": "application/json",
       }
     }).then(res => {
-      if (res.data.success === true) {
+      if (res.status == 200) {
         navigate("/login")
       }
     })

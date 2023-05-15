@@ -36,7 +36,7 @@ const Share = () => {
       if (res.status == 531 ){
         navigate("/login")
       }
-      if (res.data.success === true){
+      if (res.status == 200){
         window.location.reload()
       }
        
