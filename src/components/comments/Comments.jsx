@@ -28,7 +28,9 @@ const Comments = (post_id) => {
            "Authorization": `Bearer ${localStorage.getItem("token")}` 
        }
    }).then(res => {
-
+    if (res.status == 531 ){
+      navigate("/login")
+    }
     axios.get(api + '/api/post/' + post_id.post_id + '/comments/', {
       // options here
     }).then((res) => {

@@ -29,6 +29,9 @@ const Post = ({ post }) => {
           "Authorization": `Bearer ${localStorage.getItem("token")}` 
         }
       }).then(res => {
+        if (res.status == 531 ){
+          navigate("/login")
+        }
      
         if (liked){
       setLikes(likes -1)
@@ -44,7 +47,7 @@ const Post = ({ post }) => {
       <div className="container">
         <div className="user">
           <div className="userInfo">
-            <img src={`data:image/jpeg;base64,${post.file}`} alt="" />
+            <img src="https://whill.inc/pl/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"/>
             <div className="details">
               <Link
                 to={`/profile/${post.user.id}`}

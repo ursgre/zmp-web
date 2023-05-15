@@ -4,12 +4,14 @@ import { useParams } from "react-router-dom";
 import { useEffect , useState} from "react";
 import axios from "axios";
 import {api} from "../../api/index"; 
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Profile = () => {
   const {id} = useParams()
   const [user, setUser] = useState('')
   const [observed, setObserved] = useState([])
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -28,6 +30,9 @@ const Profile = () => {
           "Authorization": `Bearer ${localStorage.getItem("token")}` 
         }
       }).then(res => {
+        if (res.status == 531 ){
+          navigate("/login")
+        }
    getObserved()
        
 })

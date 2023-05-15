@@ -31,6 +31,9 @@ const Share = () => {
             "Authorization": `Bearer ${localStorage.getItem("token")}` 
         }
     }).then(res => {
+      if (res.status == 531 ){
+        navigate("/login")
+      }
       if (res.data.success === true){
         window.location.reload()
       }
