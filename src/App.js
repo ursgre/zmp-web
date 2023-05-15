@@ -38,7 +38,10 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
-   
+    if (!localStorage.getItem(user_id)) {
+      return <Navigate to="/login" />;
+    }
+
     return children;
   };
 
