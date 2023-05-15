@@ -5,10 +5,12 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import FileBase from "react-file-base64";
+import { Link, useNavigate } from "react-router-dom";
 
 const Share = () => {
   const [message, setMessage] = useState('')
   const [image, setImage] = useState('')
+  const navigate = useNavigate();
 
   const {currentUser} = useContext(AuthContext)
 

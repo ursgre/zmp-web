@@ -4,23 +4,25 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { Link } from "react-router-dom";
+
 import Comments from "../comments/Comments";
 import { useState } from "react";
 import axios from "axios";
 import { api } from "../../api/index";
+import { Link, useNavigate } from "react-router-dom";
 
 const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [likes, setLikes] = useState(post.total_likes);
+  
   const [liked, setLiked] = useState(()=>{
    var a = post.likes.includes(parseInt(localStorage.getItem("user_id")))
-  
+   
    return a
   });
 
   //TEMPORARY
-  
+  const navigate = useNavigate();
   
   function likePost(post_id){
     axios.post(api + `/api/post/like/${post_id}/`,{}, {
