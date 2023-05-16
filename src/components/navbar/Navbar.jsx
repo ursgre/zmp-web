@@ -54,14 +54,13 @@ const Navbar = () => {
           <button type="submit" onClick={handleSubmit}>Search</button>
         </div>
 
-        {/* <div className="user">
+        {users.length > 0 && <div className="user">
           {users.map(user=>(
          <div className="container"> 
-          <img src={`data:image/jpeg;base64,${user.file}`} alt="" />
           <p>{user.username}</p>
          </div>
           ))}
-        </div>; */}
+        </div>}
 
       </div>
       <div className="right">
