@@ -2,7 +2,7 @@ import "./navbar.scss";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { AuthContext } from "../../context/authContext";
@@ -15,6 +15,8 @@ const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
   const [search, setSearch] = useState([])
   const [users, setUsers] = useState([])
+  
+  const navigate = useNavigate();
   
   function handleSubmit(e) {
     e.preventDefault()
@@ -57,7 +59,7 @@ const Navbar = () => {
         {users.length > 0 && <div className="user">
           {users.map(user=>(
          <div className="container"> 
-          <p>{user.username}</p>
+          <p style={{padding: "0.25rem", borderBottom: "1px solid white"}} onClick={(user) => navigate(`/profile/${user.id}`) }>{user.username}</p>
          </div>
           ))}
         </div>}
