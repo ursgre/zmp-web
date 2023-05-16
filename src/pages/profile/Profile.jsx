@@ -21,7 +21,7 @@ const Profile = () => {
       setUser(res.data)
       getObserved()
     })
-  }, [])
+  }, [id])
 
   function follow() {
     axios.post(api + `/api/user/observe/`,{id: user.id}, {
