@@ -53,7 +53,7 @@ const Share = () => {
            src="https://whill.inc/pl/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"
             alt=""
           />
-          <input type="text" onChange={e => setMessage(e.target.value)} placeholder={currentUser.name ? `Tell us what you think ${currentUser.name}:)` : "Tell us what you think"} />
+          <input type="text" onChange={e => setMessage(e.target.value)} placeholder="Tell us what you think" />
         </div>
         <hr />
         <div className="bottom">
