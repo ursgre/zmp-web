@@ -21,7 +21,7 @@ const Profile = () => {
       setUser(res.data)
       getObserved()
     })
-  }, [])
+  }, [id])
 
   function follow() {
     axios.post(api + `/api/user/observe/`,{id: user.id}, {
@@ -91,7 +91,7 @@ const Profile = () => {
         
          
         </div>
-      <Posts id={id}/>
+{user.id && <Posts id={user.id}/>}
       </div>
     </div>
   );

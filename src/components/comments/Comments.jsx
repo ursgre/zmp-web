@@ -72,7 +72,7 @@ const Comments = (post_id) => {
     <div className="comments">
       <form>
       <div className="write">
-        <img src={currentUser.profilePic} alt="" />
+       
    
           <input type="text" onChange={e => setNewComment(e.target.value)} placeholder="write a comment" />
           <button type='submit' onClick={handleSubmit}>Send</button>
