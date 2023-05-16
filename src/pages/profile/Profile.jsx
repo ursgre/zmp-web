@@ -91,7 +91,7 @@ const Profile = () => {
         
          
         </div>
-      <Posts id={id}/>
+{user.id && <Posts id={user.id}/>}
       </div>
     </div>
   );
