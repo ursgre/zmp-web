@@ -45,7 +45,7 @@ const Posts = ({...props}) => {
     }).catch(error => {
       console.log(error)
     })
-  }, []) 
+  }, [props.id]) 
 
   return <div className="posts">
     {posts.map(post=>(
