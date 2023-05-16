@@ -3,7 +3,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { AuthContext } from "../../context/authContext";
 import axios from 'axios';
@@ -11,6 +11,7 @@ import {api} from "../../api/index";
 import { useState } from "react";
 
 const Navbar = () => {
+  const i = useRef(null);
   const { toggle, darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
   const [search, setSearch] = useState([])
@@ -31,6 +32,7 @@ const Navbar = () => {
        }
    }).then(res => {
     setUsers(res.data)
+     i.current.value = "";
   }).catch(error => {
     console.log(error)
   })
@@ -52,7 +54,7 @@ const Navbar = () => {
        
         <div className="search">
           <SearchOutlinedIcon />
-          <input type="text" onChange={e => setSearch(e.target.value)}  placeholder="Search..." />
+          <input ref={i} type="text" onChange={e => setSearch(e.target.value)}  placeholder="Search..." />
           <button type="submit" onClick={handleSubmit}>Search</button>
         </div>
 
