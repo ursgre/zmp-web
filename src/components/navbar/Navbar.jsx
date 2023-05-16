@@ -59,7 +59,7 @@ const Navbar = () => {
         {users.length > 0 && <div className="user">
           {users.map(user=>(
          <div className="container"> 
-          <p style={{padding: "0.25rem", borderBottom: "1px solid white"}} onClick={(user) => navigate(`/profile/${user.id}`) }>{user.username}</p>
+          <p style={{padding: "0.25rem", borderBottom: "1px solid white"}} onClick={() => navigate(`/profile/${user.id}`) }>{user.username}</p>
          </div>
           ))}
         </div>}
